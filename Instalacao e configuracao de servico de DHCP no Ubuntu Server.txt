@@ -1,1 +1,47 @@
-Instalacao e configuracao de servico de DHCP no Ubuntu Server# Instalar o DHCPsudo apt-get updatesudo apt-get install isc-dhcp-serverEditar arquivo de configuracao vim  /etc/dhcp/dhcpd.confDescomentar  as linhas Default-lease-time 1200;Max-lease-time 3600;ddns-update-style none;authoritative; subnet 172.16.0.0 netmask 255.255.255.0 { range 172.16.0.100  172.16.0.200; option domain-name-servers 172.16.0.10; option routers 172.16.0.254;}# Verificar endereços clientes DHCPcat /var/lib/dhcp/dhcpd.leasesResultado lease 172.16.0.101 {  starts 4 2021/12/09 03:29:02;  ends 4 2021/12/09 03:49:02;  tstp 4 2021/12/09 03:49:02;  cltt 4 2021/12/09 03:29:02;  binding state active;  next binding state free;  rewind binding state free;  hardware ethernet 08:00:27:29:98:1c;  uid "\001\010\000')\230\034";  set vendor-class-identifier = "MSFT 5.0";  client-hostname "Secretaria";}
+Instalacao e configuracao de servico de DHCP no Ubuntu Server
+
+# Instalar o DHCP
+
+
+sudo apt-get update
+sudo apt-get install isc-dhcp-server
+
+
+Editar arquivo de configuracao 
+
+vim  /etc/dhcp/dhcpd.conf
+
+Descomentar  as linhas 
+
+Default-lease-time 1200;
+Max-lease-time 3600;
+ddns-update-style none;
+authoritative;
+
+ subnet 172.16.0.0 netmask 255.255.255.0 {
+ range 172.16.0.100  172.16.0.200;
+ option domain-name-servers 172.16.0.10;
+ option routers 172.16.0.254;
+}
+
+# Verificar endere√ßos clientes DHCP
+
+cat /var/lib/dhcp/dhcpd.leases
+
+Resultado 
+
+lease 172.16.0.101 {
+  starts 4 2021/12/09 03:29:02;
+  ends 4 2021/12/09 03:49:02;
+  tstp 4 2021/12/09 03:49:02;
+  cltt 4 2021/12/09 03:29:02;
+  binding state active;
+  next binding state free;
+  rewind binding state free;
+  hardware ethernet 08:00:27:29:98:1c;
+  uid "\001\010\000')\230\034";
+  set vendor-class-identifier = "MSFT 5.0";
+  client-hostname "Secretaria";
+}
+
+
